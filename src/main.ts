@@ -8,7 +8,7 @@ import axios from 'axios'
 const app = createApp(App)
 // 配置默认路径
 axios.defaults.baseURL =
-  'https://www.fastmock.site/mock/9dc09422c06937432d329fe5d2893ef9/hszl'
+  'https://www.fastmock.site/mock/09a195a60460c7e332aa77e14a1921a7/elite'
 
 app.use(ElementPlus)
 app.use(router)

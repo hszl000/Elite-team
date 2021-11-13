@@ -1,11 +1,14 @@
 <script setup lang="ts">
+    // 引入 reavtive 与 （组件实例对象）
     import {reactive,getCurrentInstance } from "vue"
-    // 引入图标
+    // 引入icon图标
     import {Edit} from '@element-plus/icons'
     // 引入message弹框
     import { ElMessage } from 'element-plus'
     // 引入hook封装的axios
     import Axios from '../Hook/Axios'
+    // 引入vuex
+    import $store from '../store/index'
     const ruleForm = reactive({
         username:'林大🌳',
         password:'',
@@ -34,7 +37,6 @@
         if(username.trim() && password.trim()){
             let state = await Axios('/login','post')
             let {data} = state
-            console.log(state)
             if(data.name == 'hszl'){
                 // 请求到的数据
                 let  {user:{account,password}} =  data
@@ -45,8 +47,8 @@
                         message:'登陆成功,请稍后。。。',
                         type:'success'
                     })
-                    // 存储数据
-                    sessionStorage.setItem('name',account)
+                    //数据存储vuex
+                    $store.commit('user',data)
                     // 跳转路由
                     proxy.$root.$router.replace('/home')
                 }else{
@@ -56,11 +58,18 @@
                     })
                 }
             }else{
+                // 登录出错
                 ElMessage({
                     message:'请检测本地网络',
                     type:'error'
                 })
             }
+        }else{
+            // 未填写完成时点击登录
+            ElMessage({
+                    message:'请按照规格进行登录',
+                    type:'error'
+                })
         }
     }
 

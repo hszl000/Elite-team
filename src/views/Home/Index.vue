@@ -6,6 +6,7 @@
 <template>
     <el-container id="container">
       <el-aside class="aside" width="200px">
+        <img src="../../assets/logo.png" alt="" class="logo">
         <Aside/>
       </el-aside>
       <el-container>
@@ -29,5 +30,9 @@
   }
   .header{
     border-bottom: 1px solid #ebebeb;
+  }
+  .logo{
+    width: 100%;
+    opacity: .5;
   }
 </style>
